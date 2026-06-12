@@ -1,6 +1,6 @@
 # Fynn's World Cup 2026 Sweepstake Tracker
 
-**🔗 Live: https://jcooksh.github.io/fynntrack/**
+**🔗 Live: https://worldcup.ext.io/**
 
 Live leaderboard for a World Cup sweepstake. Eight pairs each own six national
 teams; the app pulls real match results and ranks everyone by points.

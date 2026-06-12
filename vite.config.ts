@@ -3,9 +3,9 @@ import react from "@vitejs/plugin-react"
 import tailwindcss from "@tailwindcss/vite"
 import path from "node:path"
 
-// served as a GitHub Pages project site at jcooksh.github.io/fynntrack
+// served at root on the custom domain worldcup.ext.io
 export default defineConfig({
-  base: "/fynntrack/",
+  base: "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
