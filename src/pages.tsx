@@ -340,8 +340,11 @@ export function BracketPage({ d }: { d: PageData }) {
   const aliveOwners = standings.filter((s) => koByParticipant[s.participant.id] > 0).length
 
   const Tie = ({ m }: { m: Match }) => {
-    const hw = m.homeScore != null && m.awayScore != null && m.homeScore > m.awayScore
-    const aw = m.homeScore != null && m.awayScore != null && m.awayScore > m.homeScore
+    // explicit winner first — a tie decided on pens finishes with level scores
+    const hw = m.winner === "HOME" ||
+      (m.homeScore != null && m.awayScore != null && m.homeScore > m.awayScore)
+    const aw = m.winner === "AWAY" ||
+      (m.homeScore != null && m.awayScore != null && m.awayScore > m.homeScore)
     return (
       <div className="br-tie">
         <div className={`side ${hw ? "win" : ""}`}>
@@ -690,13 +693,13 @@ export function RulesPage(_: { d: PageData }) {
             </div>
             <div>
               <div className="section-sub">If a team reaches the Final</div>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 36, color: "var(--lime)" }}>+20 pts</div>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: 36, color: "var(--lime)" }}>+{5 * POINTS.nextRound} pts</div>
               <div style={{ color: "var(--text-2)", fontSize: 13 }}>R32 + R16 + QF + SF + Final = 5 × {POINTS.nextRound}</div>
             </div>
             <div>
               <div className="section-sub">If a team wins the whole thing</div>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 36, color: "var(--lime)" }}>+24 pts</div>
-              <div style={{ color: "var(--text-2)", fontSize: 13 }}>5 rounds + champion bonus = 6 × {POINTS.nextRound}</div>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: 36, color: "var(--lime)" }}>+{5 * POINTS.nextRound + POINTS.champion} pts</div>
+              <div style={{ color: "var(--text-2)", fontSize: 13 }}>5 rounds × {POINTS.nextRound} + champion bonus {POINTS.champion}</div>
             </div>
           </div>
         </div>
